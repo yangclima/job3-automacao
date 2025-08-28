@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "name": "job3-automacao-backend",
+  "version": "1.0.0",
+  "description": "Desenvolvimento de sistema IHM integrado para bobinadeira como JOB-3 do PSEL da Watt Consultoria",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "Yan Lima",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^6.15.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "prisma": "^6.15.0"
+  }
+}

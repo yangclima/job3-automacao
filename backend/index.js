@@ -1,38 +1,21 @@
 import express from "express";
 
+import { getCoils, createCoil } from "./src/db.js"
+
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
 
-
-const db = {
-        bobinas: {
-            1: {
-                tipo: "40cm",
-                metros: 29,
-                armazem: "A"
-            },
-            2: {
-                tipo: "20cm",
-                metros: 23,
-                armazem: "B"
-            }
-        }
-}
-
-let id = Object.keys(db.bobinas).length + 1
-
-app.get("/bobinas", (req, res) => {
-    res.json(db.bobinas)
+app.get("/coils", async (req, res) => {
+    const coils = await getCoils();
+    res.status(200).json(coils)
 });
 
-app.post("/bobinas", (req, res) => {
-    const {tipo, metros, armazem} = req.body;
-    db.bobinas[id] = {tipo, metros, armazem};
-    res.status(201).json({ id, ...db.bobinas[id] });
-    id = id + 1;
-
+app.post("/coils", async (req, res) => {
+    const { type, size, warehouse } = req.body;
+    const createdCoil = await createCoil({ type, size, warehouse });
+    res.status(201).json(createdCoil);
 });
 
 app.listen(PORT, () => {

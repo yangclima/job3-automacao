@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -14,19 +8,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum armazem {
+enum Warehouse {
   A
   B
 }
 
-enum tipo {
+enum Type {
   t20cm
   t40cm
 }
 
-model Bobina {
+model Coil {
   id        Int     @id @default(autoincrement())
-  tipo      tipo
-  metros    Float
-  armazem   armazem
+  type      Type
+  size    Float
+  warehouse   Warehouse
+  manufactureDate DateTime @default(now())
 }

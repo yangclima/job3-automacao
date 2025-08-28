@@ -5,7 +5,8 @@
   "description": "Desenvolvimento de sistema IHM integrado para bobinadeira como JOB-3 do PSEL da Watt Consultoria",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "populate": "npx prisma migrate reset && npx prisma migrate dev --name migracao-inicial && node ./src/populate.js"
   },
   "author": "Yan Lima",
   "license": "MIT",

@@ -18,10 +18,27 @@ enum Type {
   t40cm
 }
 
+enum Role {
+  OPERADOR
+  GERENTE
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  name      String
+  password  String
+  role      Role     @default(OPERADOR)
+  createdAt DateTime @default(now())
+  coils     Coil[]
+}
+
 model Coil {
-  id        Int     @id @default(autoincrement())
-  type      Type
-  size    Float
-  warehouse   Warehouse
-  manufactureDate DateTime @default(now())
+  id              Int       @id @default(autoincrement())
+  type            Type
+  size            Float
+  warehouse       Warehouse
+  manufactureDate DateTime  @default(now())
+  createdBy       User?     @relation(fields: [createdById], references: [id])
+  createdById     Int?
 }

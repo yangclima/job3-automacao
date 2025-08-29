@@ -32,14 +32,13 @@ Cadastra um novo usuário no sistema.
 **Exemplo de resposta:**
 ```json
 {
-  "user": {
-    "id": 2,
-    "username": "operador01",
-    "name": "João Silva",
-    "role": "OPERADOR",
-    "createdAt": "2025-08-28T22:00:00.000Z"
-  },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+	"user": {
+		"id": 7,
+		"username": "operador08",
+		"name": "Yan Lima",
+		"role": "OPERADOR",
+		"createdAt": "2025-08-29T00:37:04.941Z"
+	}
 }
 ```
 
@@ -57,14 +56,13 @@ Realiza login no sistema.
 **Exemplo de resposta:**
 ```json
 {
-  "user": {
-    "id": 1,
-    "username": "admin",
-    "name": "Administrador",
-    "role": "GERENTE",
-    "createdAt": "2025-08-28T22:00:00.000Z"
-  },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+	"user": {
+		"id": 1,
+		"username": "admin",
+		"name": "Administrador",
+		"role": "GERENTE",
+		"createdAt": "2025-08-28T23:50:08.079Z"
+	}
 }
 ```
 
@@ -86,16 +84,23 @@ Lista todos os usuários do sistema com contagem de bobinas criadas.
     "_count": {
       "coils": 25
     }
+  },
+  {
+    "id": 2,
+    "username": "operador01",
+    "name": "Yan Lima",
+    "role": "OPERADOR",
+    "createdAt": "2025-08-28T22:00:00.000Z",
+    "_count": {
+      "coils": 257
+    }
   }
+
+  ...
 ]
 ```
 
-### Bobinas (Rotas Protegidas)
-
-**Nota:** Todas as rotas de bobinas requerem autenticação. Inclua o token no header:
-```
-Authorization: Bearer <seu-token-jwt>
-```
+### Bobinas
 
 #### 4. [GET] /coils
 Retorna a lista de bobinas cadastradas com informações do usuário que as criou.
@@ -125,26 +130,27 @@ Cria uma nova bobina (automaticamente associada ao usuário logado).
 **Body esperado:**
 ```json
 {
-  "type": "t20cm",
-  "size": 100.5,
-  "warehouse": "A"
+	"type": "t40cm",
+	"size": 30,
+	"warehouse": "A",
+	"createdById": 2
 }
 ```
 
 **Exemplo de resposta:**
 ```json
 {
-  "id": 2,
-  "type": "t20cm",
-  "size": 100.5,
-  "warehouse": "A",
-  "manufactureDate": "2025-08-28T12:00:00.000Z",
-  "createdBy": {
-    "id": 1,
-    "username": "admin",
-    "name": "Administrador"
-  },
-  "createdById": 1
+	"id": 159,
+	"type": "t40cm",
+	"size": 30,
+	"warehouse": "A",
+	"manufactureDate": "2025-08-29T00:40:54.973Z",
+	"createdById": 2,
+	"createdBy": {
+		"id": 2,
+		"username": "operador01",
+		"name": "João Silva"
+	}
 }
 ```
 
@@ -174,28 +180,3 @@ Este script criará:
 - `operador03` / `senha123` - Pedro Oliveira (**OPERADOR**)
 - `supervisor01` / `senha123` - Ana Costa (**GERENTE**)
 - `tecnico01` / `senha123` - Carlos Ferreira (**OPERADOR**)
-
-## Autenticação
-
-O sistema utiliza JWT (JSON Web Token) para autenticação. Os tokens são válidos por 8 horas (duração de um turno de trabalho).
-
-## Sistema de Permissões
-
-O sistema possui dois níveis de acesso:
-
-### OPERADOR
-- Pode criar bobinas
-- Pode visualizar todas as bobinas
-- Acesso às funcionalidades básicas do sistema
-
-### GERENTE  
-- Todas as permissões do operador
-- Pode listar todos os usuários do sistema
-- Pode ver estatísticas de produção por usuário
-- Acesso completo ao sistema
-
-**Nota:** O token JWT contém informações sobre o role do usuário, permitindo que o frontend controle a interface exibida conforme as permissões.
-
----
-
-> Para mais detalhes sobre autenticação, parâmetros ou respostas, consulte o código-fonte ou entre em contato com o responsável pelo projeto.

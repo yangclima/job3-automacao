@@ -60,7 +60,7 @@ async function populateCoils(users) {
 
   const coils = [];
 
-  for (let i = 0; i < 150; i++) {
+  for (let i = 0; i < 1500; i++) {
     const type = types[Math.floor(Math.random() * types.length)];
     const warehouse = warehouses[Math.floor(Math.random() * warehouses.length)];
     const size = parseFloat((Math.random() * 50 + 10).toFixed(2)); // tamanho entre 10 e 60

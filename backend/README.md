@@ -124,7 +124,29 @@ Retorna a lista de bobinas cadastradas com informações do usuário que as crio
 ]
 ```
 
-#### 5. [POST] /coils
+#### 5. [GET] /coils/:{id}
+Retorna as informações da bobina que possui o id informado
+
+**Exemplo de resposta:**
+```json
+[
+  {
+    "id": 123,
+    "type": "t20cm",
+    "size": 100.5,
+    "warehouse": "A",
+    "manufactureDate": "2025-08-28T12:00:00.000Z",
+    "createdBy": {
+      "id": 1,
+      "username": "admin",
+      "name": "Administrador"
+    },
+    "createdById": 1
+  }
+]
+```
+
+#### 6. [POST] /coils
 Cria uma nova bobina (automaticamente associada ao usuário logado).
 
 **Body esperado:**

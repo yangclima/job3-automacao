@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import { PrismaClient } from "./generated/prisma/index.js";
 
-import { getCoils, createCoil, createUser, getUserByUsername, validateLogin } from "./src/db.js"
+import { getCoils, createCoil, createUser, getUserByUsername, validateLogin } from "./infra/db.js"
 
 const app = express();
 const prisma = new PrismaClient();

@@ -5,12 +5,12 @@
   "description": "Desenvolvimento de sistema IHM integrado para bobinadeira como JOB-3 do PSEL da Watt Consultoria",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run services:up && npm run script:wait-for-postgres && npm run populate && nodemon index.js && npm run services:down",
+    "dev": "npm run services:up && npm run script:wait-for-postgres && npm run script:populate && nodemon index.js",
     "services:up": "docker compose -f infra/compose.yaml up -d",
+    "script:populate": "npx prisma migrate reset --force && npx prisma migrate dev --name migracao-inicial && node ./infra/populate.js",
     "script:wait-for-postgres": "node ./infra/scripts/wait-for-postgres.cjs",
     "services:stop": "docker compose -f infra/compose.yaml stop",
-    "services:down": "docker compose -f infra/compose.yaml down",
-    "populate": "npx prisma migrate reset --force && npx prisma migrate dev --name migracao-inicial && node ./infra/populate.js"
+    "services:down": "docker compose -f infra/compose.yaml down"
   },
   "author": "Yan Lima",
   "license": "MIT",
